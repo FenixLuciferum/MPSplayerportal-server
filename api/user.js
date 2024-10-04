@@ -118,7 +118,7 @@ router.post('/signup', (req, res) => {
 
 //send ver email
 const sendVerificationEmail = ({ _id, email }, res) => {
-    const currentUrl = "http://mpsplayerportal-server.vercel.app/";
+    const currentUrl = "https://mpsplayerportal-server.vercel.app/";
     const uniqueString = uuidv4() + _id;
     const mailOptions = {
         from: process.env.AUTH_EMAIL,
@@ -402,7 +402,7 @@ router.get('/forgotpassword', (req, res) => {
                 from: process.env.AUTH_EMAIL,
                 to: result[0]._doc.email,
                 subject: "MPS Forgot Password",
-                html: `<p>The link to change the password for the account ${result[0]._doc.username}, linked to this email, is: <a href = ${"http://mpsplayerportal-client.vercel.app/resetpassword/:" + result[0]._doc._id + "/:" + uniqueString}>THIS</a> </p> <p>If you weren't the one requesting your credentials, please check your mail account for any sign of hacking or send us a mail at mechaphoenixstudio@gmail.com</p>`,
+                html: `<p>The link to change the password for the account ${result[0]._doc.username}, linked to this email, is: <a href = ${"https://mpsplayerportal-client.vercel.app/resetpassword/:" + result[0]._doc._id + "/:" + uniqueString}>THIS</a> </p> <p>If you weren't the one requesting your credentials, please check your mail account for any sign of hacking or send us a mail at mechaphoenixstudio@gmail.com</p>`,
             };
 
             transporter.sendMail(mailOptions)
