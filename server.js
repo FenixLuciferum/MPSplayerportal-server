@@ -1,6 +1,7 @@
 require('./src/mongodb');
 
 const app = require('express')();
+const cors = require('cors');
 const port = 5000;
 
 
@@ -11,9 +12,9 @@ const CharRouter = require('./api/char');
 
 const cors = require("cors")
 
-app.options("*", cors({ origin: 'http://mpsplayerportal-client.vercel.app', optionsSuccessStatus: 200 }));
+app.options("*", cors({ origin: 'https://mpsplayerportal-client.vercel.app', optionsSuccessStatus: 200 }));
 
-app.use(cors({ origin: "http://mpsplayerportal-client.vercel.app", optionsSuccessStatus: 200 }));
+app.use(cors({ origin: "https://mpsplayerportal-client.vercel.app", optionsSuccessStatus: 200 }));
 
 const bodyParser = require('express').json;
 app.use(bodyParser());
