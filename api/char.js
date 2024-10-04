@@ -3,6 +3,12 @@ const router = express.Router();
 
 const character = require('./../models/character');
 
+router.all('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next()
+});
+
 
 //Grabs Char from list
 router.get('/getchar', (req, res) => {
