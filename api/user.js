@@ -376,6 +376,9 @@ router.delete('/logout', (req, res) => {
 router.get('/remember', (req, res) => {
     Session.findById(req.query.remembertoken)
         .then(result => {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "X-Requested-With");
+            next()
             res.json({
                 status: "SUCCESS",
                 message: "Session Found.",
