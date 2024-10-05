@@ -11,7 +11,7 @@ router.all('/', function(req, res, next) {
 
 
 //Grabs Char from list
-router.get('/getchar', (req, res) => {
+router.get('/getchar', cors(corsOptions), (req, res) => {
     let {ownerID} = req.query; 
     character.find({ownerID})
     .then(data => {
@@ -59,7 +59,7 @@ router.get('/getchar', (req, res) => {
 
 
 // Make New Character
-router.post('/newchar', (req,res) => {
+router.post('/newchar', cors(corsOptions),  (req,res) => {
     let {ownerID, chaName} = req.body
     if (chaName == "" || chaName == undefined) {
         res.json({
@@ -335,7 +335,7 @@ router.post('/newchar', (req,res) => {
 });
 
 // Save changes to Character
-router.put('/save', (req,res) => {
+router.put('/save',  cors(corsOptions), (req,res) => {
     let {data, char} = req.body.params
     
 
