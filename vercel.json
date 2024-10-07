@@ -7,7 +7,7 @@
    "dest": "index.js",
    "methods": ["GET", "PUT", "PATCH", "DELETE", "UPDATE", "POST", "OPTIONS"]
   }
- ]
+ ],
 
  "builds": [
   {
