@@ -8,4 +8,15 @@
    "methods": ["GET", "PUT", "PATCH", "DELETE", "UPDATE", "POST", "OPTIONS"]
   }
  ]
+
+ "builds": [
+  {
+   "src": "index.js",
+      "use": "@vercel/node",
+      "config": 
+      {
+        "includeFiles": ["package.json"]
+      }
+  }
+ ]
 }
