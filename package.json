@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node server",
     "dev": "nodemon server",
-    "start": "vercel dev"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
