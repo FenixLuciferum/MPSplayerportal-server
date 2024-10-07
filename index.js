@@ -19,7 +19,8 @@ app.use(cors(corsOption));
 
 
 const bodyParser = require('express').json;
-app.use(bodyParser());
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Qui usa le API
 app.use('/user', UserRouter)
