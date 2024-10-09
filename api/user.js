@@ -8,6 +8,13 @@ const userVerification = require('./../models/userVerification');
 const bcrypt = require('bcrypt');
 const path = require("path");
 
+const cors = require('cors');
+const corsOption = {
+  credentials: true,
+  origin: ['https://mpsplayerportal-client.vercel.app', 'https://mpsplayerportal-server.vercel.app']
+}
+
+
 //nodemailer
 
 const nodemailer = require('nodemailer');
