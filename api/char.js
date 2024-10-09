@@ -3,6 +3,13 @@ const router = express.Router();
 
 const character = require('./../models/character');
 
+const cors = require('cors');
+const corsOption = {
+  credentials: true,
+  origin: ['https://mpsplayerportal-client.vercel.app', 'https://mpsplayerportal-server.vercel.app']
+}
+
+
 
 //Grabs Char from list
 router.get('/getchar', cors(corsOptions), (req, res) => {
