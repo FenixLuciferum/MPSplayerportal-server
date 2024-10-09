@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 const path = require("path");
 
 const cors = require('cors');
-const corsOption = {
+const corsOptions = {
   credentials: true,
   origin: ['https://mpsplayerportal-client.vercel.app', 'https://mpsplayerportal-server.vercel.app']
 }
