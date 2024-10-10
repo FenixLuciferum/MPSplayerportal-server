@@ -33,31 +33,6 @@ router.get('/getchar', cors(corsOptions), (req, res) => {
 
 });
 
-//Grabs only one Character (Seems I can't grab the ID just like that)
-/* router.get('/getone', (req, res) => {
-    let {stringID} = req.query;
-    stringID = stringID.substring(1);
-    _id = `ObjectId('${stringID}')`;
-    character.find({_id})
-    .then(data => {
-        if (data.length) {
-            res.json({
-                status: "SUCCESS",
-                message: "Character Data Loaded",
-                data: data
-            })
-        }
-    })
-    .catch(err => {
-        res.json({
-            status: "FAILED",
-            message: "Error occurred while checking for characters.",
-        })
-    });
-
-}); */
-
-
 
 // Make New Character
 router.post('/newchar', cors(corsOptions),  (req,res) => {
@@ -338,7 +313,6 @@ router.post('/newchar', cors(corsOptions),  (req,res) => {
 // Save changes to Character
 router.put('/save',  cors(corsOptions), (req,res) => {
     let {data, char} = req.body.params
-    
 
     char = char.substring(1);
     console.log(char);
@@ -346,6 +320,7 @@ router.put('/save',  cors(corsOptions), (req,res) => {
     character.findByIdAndUpdate(char, data[0])
     
     .then(result => {
+        console.log('Character has been Saved')
         res.json({
             status: "SUCCESS",
             message: "Character Updated!",
@@ -353,6 +328,7 @@ router.put('/save',  cors(corsOptions), (req,res) => {
         });
     })
     .catch(err => {
+        console.log('Error in saving character')
         res.json({
             status: "FAILED",
             message: "An error occurred while saving character."
