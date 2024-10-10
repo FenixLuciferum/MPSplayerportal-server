@@ -318,8 +318,6 @@ router.put('/save',  cors(corsOptions), (req,res) => {
     console.log(char);
 
     character.findByIdAndUpdate(char, data[0])
-
-    console.log(result);
       
     .then(result => {
         console.log('Character has been Saved')
