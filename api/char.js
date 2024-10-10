@@ -321,6 +321,7 @@ router.put('/save',  cors(corsOptions), (req,res) => {
       
     .then(result => {
         console.log('Character has been Saved')
+        console.log(result)
         res.json({
             status: "SUCCESS",
             message: "Character Updated!",
