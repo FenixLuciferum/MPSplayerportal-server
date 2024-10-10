@@ -330,6 +330,7 @@ router.put('/save',  cors(corsOptions), (req,res) => {
     })
     .catch(err => {
         console.log('Error in saving character')
+        console.log(err)
         res.json({
             status: "FAILED",
             message: "An error occurred while saving character."
