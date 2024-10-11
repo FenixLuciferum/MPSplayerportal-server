@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const character = require('./../models/character');
+var cors = require('cors')
 
+router.options('*', cors())
 
 //Grabs Char from list
 router.get('/getchar', (req, res) => {
