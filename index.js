@@ -12,7 +12,9 @@ const CharRouter = require('./api/char');
 
 const corsOption = {
   credentials: true,
-  origin: ['https://mpsplayerportal-client.vercel.app', 'https://mpsplayerportal-server.vercel.app']
+  origin: ['https://mpsplayerportal-client.vercel.app', 'https://mpsplayerportal-server.vercel.app'],
+  methods: 'GET, PUT, OPTIONS, POST, DELETE, PATCH',
+  optionsSuccessStatus: 204
 }
 
 app.use(cors(corsOption));
