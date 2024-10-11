@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-import mongoose from 'mongoose';
 
 const character = require('./../models/character');
 
