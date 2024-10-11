@@ -8,16 +8,6 @@ const userVerification = require('./../models/userVerification');
 const bcrypt = require('bcrypt');
 const path = require("path");
 
-const cors = require('cors');
-const corsOptions = {
-  credentials: true,
-  origin: ['https://mpsplayerportal-client.vercel.app', 'https://mpsplayerportal-server.vercel.app'],
-  methods: 'GET, PUT, OPTIONS, POST, DELETE, PATCH',
-  optionsSuccessStatus: 204,
-  allowedHeaders: 'Content-Type, Authorization'
-}
-
-
 //nodemailer
 
 const nodemailer = require('nodemailer');
@@ -47,7 +37,7 @@ transporter.verify((error, success) => {
 });
 
 //signup
-router.post('/signup', cors(corsOptions),  (req, res) => {
+router.post('/signup', (req, res) => {
     let { username, email, password } = req.body;
 
     if (username == "" || email == "" || password == "" || username == undefined || password == undefined || email == undefined) {
@@ -182,7 +172,7 @@ const sendVerificationEmail = ({ _id, email }, res) => {
 };
 
 //verify email
-router.get('/verify/:userID/:uniqueString', cors(corsOptions),  (req, res) => {
+router.get('/verify/:userID/:uniqueString', (req, res) => {
     let { userID, uniqueString } = req.params;
     userVerification.find({ userID })
         .then((result) => {
@@ -259,12 +249,12 @@ router.get('/verify/:userID/:uniqueString', cors(corsOptions),  (req, res) => {
 });
 
 //route for custom html
-router.get("/verified", cors(corsOptions),  (req, res) => {
+router.get("/verified", (req, res) => {
     res.sendFile(path.join(__dirname, "./../models/verified.html"));
 });
 
 //signin
-router.get('/signin', cors(corsOptions),  (req, res) => {
+router.get('/signin', (req, res) => {
     let { username, password } = req.query;
     if (username == "" || password == "" || username == undefined || password == undefined) {
         res.json({
@@ -327,7 +317,7 @@ router.get('/signin', cors(corsOptions),  (req, res) => {
 });
 
 //auth login
-router.post('/logsession', cors(corsOptions),  (req, res) => {
+router.post('/logsession', (req, res) => {
     let { user, userID } = req.body;
 
     const newSession = new Session({
@@ -354,7 +344,7 @@ router.post('/logsession', cors(corsOptions),  (req, res) => {
 
 
 //logout
-router.delete('/logout', cors(corsOptions),  (req, res) => {
+router.delete('/logout', (req, res) => {
     Session.findByIdAndDelete(req.query.tokenID)
         .then(result => {
             res.json({
@@ -376,7 +366,7 @@ router.delete('/logout', cors(corsOptions),  (req, res) => {
 
 
 //rememberuser
-router.get('/remember', cors(corsOptions),  (req, res) => {
+router.get('/remember', (req, res) => {
     Session.findById(req.query.remembertoken)
         .then(result => {
             res.json({
@@ -398,7 +388,7 @@ router.get('/remember', cors(corsOptions),  (req, res) => {
 
 
 //forgotpassword
-router.get('/forgotpassword', cors(corsOptions),  (req, res) => {
+router.get('/forgotpassword', (req, res) => {
     user.find({ email: req.query.email })
 
         .then
@@ -436,7 +426,7 @@ router.get('/forgotpassword', cors(corsOptions),  (req, res) => {
 });
 
 //updatepassword
-router.patch('/passwordupdate', cors(corsOptions),  (req, res) => {
+router.patch('/passwordupdate', (req, res) => {
     id = req.body.params.userID;
     newpassword = req.body.params.newpassword;
 
