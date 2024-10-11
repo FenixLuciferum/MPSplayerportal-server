@@ -14,7 +14,8 @@ const corsOption = {
   credentials: true,
   origin: ['https://mpsplayerportal-client.vercel.app', 'https://mpsplayerportal-server.vercel.app'],
   methods: 'GET, PUT, OPTIONS, POST, DELETE, PATCH',
-  optionsSuccessStatus: 204
+  optionsSuccessStatus: 204,
+  allowedHeaders: 'Content-Type, Authorization'
 }
 
 app.use(cors(corsOption));
