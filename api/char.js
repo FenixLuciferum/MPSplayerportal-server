@@ -310,8 +310,8 @@ router.post('/newchar', cors(corsOptions),  (req,res) => {
 
 });
 
-// Save changes to Character
-router.put('/save',  cors(corsOptions), (req,res) => {
+// Save changes to Character (mia OG)
+/*router.put('/save',  cors(corsOptions), (req,res) => {
 
     console.log('Req Log');
     console.log(req);
@@ -346,6 +346,86 @@ router.put('/save',  cors(corsOptions), (req,res) => {
     })
     
 
+});*/
+
+router.put('/save', cors(corsOptions), (req, res) => {
+
+    console.log('Req Log');
+    console.log(req.body);
+
+    // Verifica che req.body e req.body.params esistano
+    if (!req.body || !req.body.params) {
+        console.log('Missing body or params');
+        return res.status(400).json({
+            status: "FAILED",
+            message: "Invalid request body or missing params."
+        });
+    }
+
+    let { data, char } = req.body.params;
+
+    console.log('Body Log');
+    console.log('Params:', req.body.params);
+
+    // Verifica che data e char siano definiti
+    if (!char ||  data || !Array.isArray(data) || data.length === 0) {
+        console.log('Invalid data or char');
+        return res.status(400).json({
+            status: "FAILED",
+            message: "Invalid character ID or data."
+        });
+    }
+
+    // Assicurati che char sia una stringa prima di fare substring
+    if (typeof char === 'string' && char.length > 1) {
+        char = char.substring(1);
+    } else {
+        console.log('Invalid character ID format');
+        return res.status(400).json({
+            status: "FAILED",
+            message: "Invalid character ID format."
+        });
+    }
+
+    console.log('Character ID Log');
+    console.log(char);
+
+    // Assicurati che data[0] sia un oggetto prima di aggiornare
+    if (typeof data[0] !== 'object') {
+        console.log('Invalid data format');
+        return res.status(400).json({
+            status: "FAILED",
+            message: "Data must be an object."
+        });
+    }
+
+    // Find and update the character
+    character.findByIdAndUpdate(char, data[0])
+        .then(result => {
+            if (!result) {
+                console.log('Character not found');
+                return res.status(404).json({
+                    status: "FAILED",
+                    message: "Character not found."
+                });
+            }
+
+            console.log('Character has been saved');
+            console.log(result);
+            res.json({
+                status: "SUCCESS",
+                message: "Character updated!",
+                data: result
+            });
+        })
+        .catch(err => {
+            console.log('Error in saving character');
+            console.log(err);
+            res.status(500).json({
+                status: "FAILED",
+                message: "An error occurred while saving character."
+            });
+        });
 });
 
 module.exports = router;
