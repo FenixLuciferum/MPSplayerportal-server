@@ -368,7 +368,7 @@ router.put('/save', cors(corsOptions), (req, res) => {
     console.log('Params:', req.body.params);
 
     // Verifica che data e char siano definiti
-    if (!char ||  data || !Array.isArray(data) || data.length === 0) {
+    if (!char || !data || !Array.isArray(data) || data.length === 0) {
         console.log('Invalid data or char');
         return res.status(400).json({
             status: "FAILED",
