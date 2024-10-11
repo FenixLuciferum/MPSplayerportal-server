@@ -313,6 +313,7 @@ router.post('/newchar', cors(corsOptions),  (req,res) => {
 // Save changes to Character
 router.put('/save',  cors(corsOptions), (req,res) => {
     let {data, char} = req.body.params
+    console.log(req.body.params);
 
     char = char.substring(1);
     console.log(char);
