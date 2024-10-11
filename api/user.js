@@ -11,7 +11,9 @@ const path = require("path");
 const cors = require('cors');
 const corsOptions = {
   credentials: true,
-  origin: ['https://mpsplayerportal-client.vercel.app', 'https://mpsplayerportal-server.vercel.app']
+  origin: ['https://mpsplayerportal-client.vercel.app', 'https://mpsplayerportal-server.vercel.app'],
+  methods: 'GET, PUT, OPTIONS, POST, DELETE, PATCH',
+  optionsSuccessStatus: 204
 }
 
 
