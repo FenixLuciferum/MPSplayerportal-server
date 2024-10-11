@@ -312,6 +312,10 @@ router.post('/newchar', cors(corsOptions),  (req,res) => {
 
 // Save changes to Character
 router.put('/save',  cors(corsOptions), (req,res) => {
+
+    console.log('Req Log');
+    console.log(req);
+  
     let {data, char} = req.body.params
 
     console.log('Body Log');
