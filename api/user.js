@@ -1,8 +1,7 @@
 const alert = require('alert');
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 
 const user = require('./../models/user');
 const userVerification = require('./../models/userVerification');
