@@ -250,7 +250,7 @@ router.get('/verify/:userID/:uniqueString', (req, res) => {
 });
 
 //route for custom html
-router.get("/verified", cors(corsOptions),  (req, res) => {
+router.get("/verified", (req, res) => {
     res.sendFile(path.join(__dirname, "./../models/verified.html"));
 });
 
