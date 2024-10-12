@@ -343,7 +343,7 @@ router.post('/newchar', (req,res) => {
 
 });*/
 
-router.put('/save', (req, res) => {
+router.put('/save', cors(), (req, res, next) => {
 
     console.log('Req Log');
     console.log(req.body);
