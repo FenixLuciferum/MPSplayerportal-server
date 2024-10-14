@@ -406,19 +406,19 @@ router.get('/forgotpassword', cors(corsOption), (req, res, next) => {
         (result => {
 
             //console.log(result[0]._doc.email);
-            const uniqueString = uuidv4() + result[0]._doc._id;
+            const uniqueString = uuidv4() + result[0]._id;
 
             //Send Email with de-hashed password
             const mailOptions = {
                 from: process.env.AUTH_EMAIL,
-                to: result[0]._doc.email,
+                to: result[0].email,
                 subject: "MPS Forgot Password",
-                html: `<p>The link to change the password for the account ${result[0]._doc.username}, linked to this email, is: <a href = ${"https://mpsplayerportal-client.vercel.app/resetpassword/:" + result[0]._doc._id + "/:" + uniqueString}>THIS</a> </p> <p>If you weren't the one requesting your credentials, please check your mail account for any sign of hacking or send us a mail at mechaphoenixstudio@gmail.com</p>`,
+                html: `<p>The link to change the password for the account ${result[0].username}, linked to this email, is: <a href = ${"https://mpsplayerportal-client.vercel.app/resetpassword/:" + result[0]._id + "/:" + uniqueString}>THIS</a> </p> <p>If you weren't the one requesting your credentials, please check your mail account for any sign of hacking or send us a mail at mechaphoenixstudio@gmail.com</p>`,
             };
 
             transporter.sendMail(mailOptions)
 
-            result[0]._doc.resettoken = uniqueString;
+            result[0].resettoken = uniqueString;
 
             res.json({
                 status: "SUCCESS",
