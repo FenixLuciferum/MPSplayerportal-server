@@ -2,12 +2,20 @@ const express = require('express');
 const router = express.Router();
 
 const character = require('./../models/character');
-var cors = require('cors')
 
-router.options('/save', cors());
+var cors = require('cors')
+const corsOption = {
+  credentials: true,
+  origin: ['https://mpsplayerportal-client.vercel.app', 'https://mpsplayerportal-server.vercel.app'],
+  methods: 'GET, PUT, OPTIONS, POST, DELETE, PATCH',
+  optionsSuccessStatus: 204,
+  allowedHeaders: 'Content-Type, Authorization, content-type'
+}
+
+router.options('*', cors(corsOption));
 
 //Grabs Char from list
-router.get('/getchar', (req, res) => {
+router.get('/getchar', cors(corsOption), (req, res, next) => {
     let {ownerID} = req.query; 
     character.find({ownerID})
     .then(data => {
@@ -30,7 +38,7 @@ router.get('/getchar', (req, res) => {
 
 
 // Make New Character
-router.post('/newchar', (req,res) => {
+router.post('/newchar', cors(corsOption), (req, res, next) => {
     let {ownerID, chaName} = req.body
     if (chaName == "" || chaName == undefined) {
         res.json({
@@ -306,7 +314,7 @@ router.post('/newchar', (req,res) => {
 });
 
 // Save changes to Character (mia OG)
-/*router.put('/save', (req,res) => {
+/*router.put('/save', cors(corsOption), (req, res, next) => {
 
     console.log('Req Log');
     console.log(req);
@@ -343,7 +351,7 @@ router.post('/newchar', (req,res) => {
 
 });*/
 
-router.put('/save', cors(), (req, res, next) => {
+router.put('/save', cors(corsOption), (req, res, next) => {
 
     console.log('Req Log');
     console.log(req.body);
