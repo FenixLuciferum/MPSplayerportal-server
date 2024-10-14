@@ -402,6 +402,8 @@ router.get('/remember', cors(corsOption), (req, res, next) => {
 router.get('/forgotpassword', cors(corsOption), (req, res, next) => {
     user.find({ email: req.query.email })
 
+      console.log(result);
+        
         .then
         (result => {
 
