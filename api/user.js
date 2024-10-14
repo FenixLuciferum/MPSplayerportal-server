@@ -16,6 +16,17 @@ const Session = require('../models/session');
 
 require("dotenv").config();
 
+var cors = require('cors')
+const corsOption = {
+  credentials: true,
+  origin: ['https://mpsplayerportal-client.vercel.app', 'https://mpsplayerportal-server.vercel.app'],
+  methods: 'GET, PUT, OPTIONS, POST, DELETE, PATCH',
+  optionsSuccessStatus: 204,
+  allowedHeaders: 'Content-Type, Authorization, content-type'
+}
+
+router.options('*', cors(corsOption));
+
 let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -37,7 +48,7 @@ transporter.verify((error, success) => {
 });
 
 //signup
-router.post('/signup', (req, res) => {
+router.post('/signup', cors(corsOption), (req, res, next) => {
     let { username, email, password } = req.body;
 
     if (username == "" || email == "" || password == "" || username == undefined || password == undefined || email == undefined) {
@@ -172,7 +183,7 @@ const sendVerificationEmail = ({ _id, email }, res) => {
 };
 
 //verify email
-router.get('/verify/:userID/:uniqueString', (req, res) => {
+router.get('/verify/:userID/:uniqueString', cors(corsOption), (req, res, next) => {
     let { userID, uniqueString } = req.params;
     userVerification.find({ userID })
         .then((result) => {
@@ -249,12 +260,12 @@ router.get('/verify/:userID/:uniqueString', (req, res) => {
 });
 
 //route for custom html
-router.get("/verified", (req, res) => {
+router.get("/verified", cors(corsOption), (req, res, next) => {
     res.sendFile(path.join(__dirname, "./../models/verified.html"));
 });
 
 //signin
-router.get('/signin', (req, res) => {
+router.get('/signin', cors(corsOption), (req, res, next) => {
     let { username, password } = req.query;
     if (username == "" || password == "" || username == undefined || password == undefined) {
         res.json({
@@ -317,7 +328,7 @@ router.get('/signin', (req, res) => {
 });
 
 //auth login
-router.post('/logsession', (req, res) => {
+router.post('/logsession', cors(corsOption), (req, res, next) => {
     let { user, userID } = req.body;
 
     const newSession = new Session({
@@ -344,7 +355,7 @@ router.post('/logsession', (req, res) => {
 
 
 //logout
-router.delete('/logout', (req, res) => {
+router.delete('/logout', cors(corsOption), (req, res, next) => {
     Session.findByIdAndDelete(req.query.tokenID)
         .then(result => {
             res.json({
@@ -366,7 +377,7 @@ router.delete('/logout', (req, res) => {
 
 
 //rememberuser
-router.get('/remember', (req, res) => {
+router.get('/remember', cors(corsOption), (req, res, next) => {
     Session.findById(req.query.remembertoken)
         .then(result => {
             res.json({
@@ -388,7 +399,7 @@ router.get('/remember', (req, res) => {
 
 
 //forgotpassword
-router.get('/forgotpassword', (req, res) => {
+router.get('/forgotpassword', cors(corsOption), (req, res, next) => {
     user.find({ email: req.query.email })
 
         .then
@@ -426,7 +437,7 @@ router.get('/forgotpassword', (req, res) => {
 });
 
 //updatepassword
-router.patch('/passwordupdate', (req, res) => {
+router.patch('/passwordupdate', cors(corsOption), (req, res, next) => {
     id = req.body.params.userID;
     newpassword = req.body.params.newpassword;
 
