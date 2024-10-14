@@ -400,13 +400,16 @@ router.get('/remember', cors(corsOption), (req, res, next) => {
 
 //forgotpassword
 router.get('/forgotpassword', cors(corsOption), (req, res, next) => {
+  console.log('email for forgotten password');  
+  console.log(req.query.email);
+  
     user.find({ email: req.query.email })
-
-      console.log(result);
         
         .then
         (result => {
 
+            console.log(result);
+          
             //console.log(result[0]._doc.email);
             const uniqueString = uuidv4() + result[0]._id;
 
