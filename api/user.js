@@ -19,7 +19,7 @@ require("dotenv").config();
 var cors = require('cors')
 const corsOption = {
   credentials: true,
-  origin: ['https://mpsplayerportal-client.vercel.app', 'https://mpsplayerportal-server.vercel.app'],
+  origin: ['*'],
   methods: 'GET, PUT, OPTIONS, POST, DELETE, PATCH',
   optionsSuccessStatus: 204,
   allowedHeaders: 'Content-Type, Authorization, content-type'
