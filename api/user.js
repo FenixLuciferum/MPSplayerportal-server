@@ -408,7 +408,7 @@ router.get('/forgotpassword', cors(corsOption), (req, res, next) => {
         .then
         (result => {
 
-            console.log(result[0]._doc);
+            console.log(result);
           
             //console.log(result[0]._doc.email);
             const uniqueString = uuidv4() + result[0]._doc._id;
@@ -423,7 +423,7 @@ router.get('/forgotpassword', cors(corsOption), (req, res, next) => {
 
             transporter.sendMail(mailOptions)
 
-            result[0].resettoken = uniqueString;
+            result[0]._doc.resettoken = uniqueString;
 
             res.json({
                 status: "SUCCESS",
