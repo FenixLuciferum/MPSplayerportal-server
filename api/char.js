@@ -352,4 +352,29 @@ router.patch('/save', cors(corsOption), (req, res, next) => {
 });
 
 
+router.delete('/delete', cors(corsOption), (req, res, next) => {
+    
+    let charID = req.query.char;
+    charID = charID.substring(1)
+
+    character.findByIdAndDelete(charID)
+        .then(result => {
+            res.json({
+                status: "SUCCESS",
+                message: "Character Deleted.",
+                data: result
+            });
+        })
+        .catch(err => {
+            res.json({
+                status: "FAILED",
+                message: "An error occurred while deleting Character.",
+                data: err
+            })
+        })
+
+
+});
+
+
 module.exports = router;

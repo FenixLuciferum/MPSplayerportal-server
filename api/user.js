@@ -360,7 +360,7 @@ router.delete('/logout', cors(corsOption), (req, res, next) => {
         .then(result => {
             res.json({
                 status: "SUCCESS",
-                message: "Session Created.",
+                message: "Session Deleted.",
                 data: result
             });
         })
